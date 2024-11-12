@@ -2,7 +2,7 @@ import streamlit as st
 from fpdf import FPDF
 from datetime import datetime
 
-# Function to create PDF
+# Function to create PDF with top gap
 def create_pdf(date, full_name, designation, company_name, city_state, sir_maam, guar_type_1, guar_weight_1, guar_type_2, guar_weight_2):
     pdf = FPDF()
     pdf.add_page()
@@ -10,7 +10,10 @@ def create_pdf(date, full_name, designation, company_name, city_state, sir_maam,
     # Setting font
     pdf.set_font("Arial", size=12)
 
-    # Adding the content, replacing unsupported characters
+    # Adding top gap
+    pdf.ln(120)  # Adjust the value (e.g., 100, 120) to match the gap you need
+
+    # Adding the content
     pdf.cell(200, 10, txt="Kindly Att.", ln=True, align='R')
     pdf.cell(200, 10, txt=f"Date-{date}", ln=True, align='R')
     pdf.ln(10)
@@ -26,7 +29,6 @@ def create_pdf(date, full_name, designation, company_name, city_state, sir_maam,
     pdf.cell(200, 10, txt="As per your requirement we are sending you sample of -", ln=True)
     pdf.ln(10)
     
-    # Replace the en dash with a hyphen here
     pdf.cell(200, 10, txt=f"A) Guar {guar_type_1} - {guar_weight_1}KG.", ln=True)
     pdf.cell(200, 10, txt=f"B) Guar {guar_type_2} - {guar_weight_2}KG.", ln=True)
     pdf.ln(10)
