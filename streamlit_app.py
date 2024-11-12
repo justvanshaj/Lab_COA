@@ -1,54 +1,75 @@
 import streamlit as st
-from PIL import Image
+from fpdf import FPDF
+from datetime import datetime
 
-st.header("Aravally Sieve Shaker Calculator")
-hide_st_style="""
-<style>
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
-header {visibility: hidden;}
-</style>
-"""
-st.markdown(hide_st_style, unsafe_allow_html=True)
+# Function to create PDF
+def create_pdf(date, full_name, designation, company_name, city_state, sir_maam, guar_type_1, guar_weight_1, guar_type_2, guar_weight_2):
+    pdf = FPDF()
+    pdf.add_page()
 
-# Load the image (replace 'image.jpg' with your file path)
-img = Image.open('Banner.jpg')
+    # Setting font
+    pdf.set_font("Arial", size=12)
 
-# Display the image
-st.image(img, caption='', use_column_width=True)
+    # Adding the content
+    pdf.cell(200, 10, txt="Kindly Att.", ln=True, align='R')
+    pdf.cell(200, 10, txt=f"Date-{date}", ln=True, align='R')
+    pdf.ln(10)
+    
+    pdf.cell(200, 10, txt=f"{sir_maam} {full_name},", ln=True)
+    pdf.cell(200, 10, txt=designation, ln=True)
+    pdf.cell(200, 10, txt=company_name + ",", ln=True)
+    pdf.cell(200, 10, txt=city_state, ln=True)
+    pdf.ln(10)
+    
+    pdf.cell(200, 10, txt=f"Dear {sir_maam},", ln=True)
+    pdf.ln(10)
+    pdf.cell(200, 10, txt="As per your requirement we are sending you sample of -", ln=True)
+    pdf.ln(10)
+    
+    pdf.cell(200, 10, txt=f"A) Guar {guar_type_1} – {guar_weight_1}KG.", ln=True)
+    pdf.cell(200, 10, txt=f"B) Guar {guar_type_2} – {guar_weight_2}KG.", ln=True)
+    pdf.ln(10)
+    
+    pdf.cell(200, 10, txt="Kindly acknowledge me receipt of the same.", ln=True)
+    pdf.ln(20)
+    
+    pdf.cell(200, 10, txt="Yours Faithfully,", ln=True)
+    pdf.ln(10)
+    
+    pdf.cell(200, 10, txt="Authorised Signatory", ln=True)
+    pdf.cell(200, 10, txt="Aravally Processed Agrotech Pvt Ltd", ln=True)
+    
+    # Saving the PDF
+    pdf_output = "generated_letter.pdf"
+    pdf.output(pdf_output)
+    return pdf_output
 
-# Input for sample
-x = st.number_input("Enter Sample:", min_value=1, step=1)
+# Streamlit App
+st.title("Generate a Custom PDF Letter")
 
-# Inputs for each weight
-y1 = st.number_input("Enter 60#:", min_value=0.000, step=0.001,format="%.3f")
-y2 = st.number_input("Enter 100#:", min_value=0.000, step=0.001,format="%.3f")
-y3 = st.number_input("Enter 150#:", min_value=0.000, step=0.001,format="%.3f")
-y4 = st.number_input("Enter 200#:", min_value=0.000, step=0.001,format="%.3f")
-y5 = st.number_input("Enter 240#:", min_value=0.000, step=0.001,format="%.3f")
-y6 = st.number_input("Enter 300#:", min_value=0.000, step=0.001,format="%.3f")
-y7 = st.number_input("Enter 350#:", min_value=0.000, step=0.001,format="%.3f")
-y8 = st.number_input("Enter Base:", min_value=0.000, step=0.001,format="%.3f")
+# Form to collect data
+with st.form("pdf_form"):
+    date = st.date_input("Date", value=datetime.today())
+    full_name = st.text_input("Full Name")
+    designation = st.text_input("Designation")
+    company_name = st.text_input("Company Name")
+    city_state = st.text_input("City, State")
+    sir_maam = st.selectbox("Salutation", ["Mr.", "Mrs.", "Miss", "Sir/Ma’am"])
+    guar_type_1 = st.selectbox("Guar Type A", ["Churi", "Korma"])
+    guar_weight_1 = st.number_input("Guar Weight A (KG)", min_value=0)
+    guar_type_2 = st.selectbox("Guar Type B", ["Churi", "Korma"])
+    guar_weight_2 = st.number_input("Guar Weight B (KG)", min_value=0)
+    
+    # Submit button
+    submitted = st.form_submit_button("Generate PDF")
 
-# Perform the calculations
-if x > 0:
-    z1 = (y1 * 100) / x
-    z2 = (y2 * 100) / x + z1
-    z3 = (y3 * 100) / x + z2
-    z4 = (y4 * 100) / x + z3
-    z5 = (y5 * 100) / x + z4
-    z6 = (y6 * 100) / x + z5
-    z7 = (y7 * 100) / x + z6
-    z8 = (y8 * 100) / x + z7
-
-    # Display the results
-    st.write(f"60#  : {z1:.4f}%")
-    st.write(f"100# : {z2:.4f}%")
-    st.write(f"150# : {z3:.4f}%")
-    st.write(f"200# : {z4:.4f}%")
-    st.write(f"240# : {z5:.4f}%")
-    st.write(f"300# : {z6:.4f}%")
-    st.write(f"350# : {z7:.4f}%")
-    st.write(f"Base : {z8:.4f}%")
-else:
-    st.write("Please enter a sample greater than 0.")
+if submitted:
+    # Convert date to string format
+    date_str = date.strftime("%d/%m/%Y")
+    
+    # Create PDF
+    pdf_path = create_pdf(date_str, full_name, designation, company_name, city_state, sir_maam, guar_type_1, guar_weight_1, guar_type_2, guar_weight_2)
+    
+    # Display the link to download the PDF
+    with open(pdf_path, "rb") as f:
+        st.download_button("Download PDF", f, file_name="generated_letter.pdf")
