@@ -30,16 +30,16 @@ def create_pdf(date, salutation, full_name, designation, company_name, city_stat
     pdf.ln(10)
     
     pdf.cell(200, 10, txt=f"Dear {salutation} {full_name},", ln=True)
-    pdf.ln(10)
+    pdf.ln(5)
     pdf.cell(200, 10, txt="As per your requirement we are sending you sample of -", ln=True)
-    pdf.ln(10)
+    pdf.ln(5)
     
     pdf.cell(200, 10, txt=f"A) Guar {guar_type_1} - {guar_weight_1}KG.", ln=True)
     pdf.cell(200, 10, txt=f"B) Guar {guar_type_2} - {guar_weight_2}KG.", ln=True)
     pdf.ln(10)
     
     pdf.cell(200, 10, txt="Kindly acknowledge me receipt of the same.", ln=True)
-    pdf.ln(20)
+    pdf.ln(10)
     
     # Bold Authorized Signatory and Company Name
     pdf.set_font("Arial", style='B', size=10)
