@@ -8,7 +8,7 @@ def create_pdf(date, full_name, designation, company_name, city_state, sir_maam,
     pdf.add_page()
 
     # Setting font
-    pdf.set_font("Arial", size=12)
+    pdf.set_font("Arial", size=10)
 
     # Adding top gap
     pdf.ln(50)  # Adjust the value as needed to match your desired gap
