@@ -26,7 +26,7 @@ def create_pdf(date, salutation1, full_name, designation, company_name, city_sta
     pdf.cell(200, 5, txt=designation, ln=True)
     pdf.cell(200, 5, txt=company_name + ",", ln=True)
     pdf.cell(200, 5, txt=city_state, ln=True)
-    pdf.ln(10)
+    pdf.ln(4)
 
     pdf.set_font("Arial", size=0)
     pdf.cell(200, 10, txt=f"Dear {salutation2},", ln=True)
@@ -44,7 +44,7 @@ def create_pdf(date, salutation1, full_name, designation, company_name, city_sta
     # Bold Authorized Signatory and Company Name
     pdf.set_font("Arial", style='B', size=10)
     pdf.cell(200, 10, txt="Yours Faithfully,", ln=True)
-    pdf.ln(10)
+    pdf.ln(15)
     pdf.cell(200, 10, txt="Authorised Signatory", ln=True)
     pdf.cell(200, 10, txt="Aravally Processed Agrotech Pvt Ltd", ln=True)
     
