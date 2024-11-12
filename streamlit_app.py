@@ -59,7 +59,7 @@ with st.form("pdf_form"):
     designation = st.text_input("Designation")
     company_name = st.text_input("Company Name")
     city_state = st.text_input("City, State")
-    sir_maam = st.selectbox("Salutation", ["Mr.", "Mrs.", "Miss", "Sir/Ma’am"])
+    sir_maam = st.selectbox("Salutation", ["Sir", "Ma’am"])
     guar_type_1 = st.selectbox("Guar Type A", ["Churi", "Korma"])
     guar_weight_1 = st.number_input("Guar Weight A (KG)", min_value=0)
     guar_type_2 = st.selectbox("Guar Type B", ["Churi", "Korma"])
