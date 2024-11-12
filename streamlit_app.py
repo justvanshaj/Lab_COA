@@ -11,7 +11,7 @@ def create_pdf(date, full_name, designation, company_name, city_state, sir_maam,
     pdf.set_font("Arial", size=12)
 
     # Adding top gap
-    pdf.ln(120)  # Adjust the value (e.g., 100, 120) to match the gap you need
+    pdf.ln(50)  # Adjust the value (e.g., 100, 120) to match the gap you need
 
     # Adding the content
     pdf.cell(200, 10, txt="Kindly Att.", ln=True, align='L')
