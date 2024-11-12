@@ -14,7 +14,7 @@ def create_pdf(date, full_name, designation, company_name, city_state, sir_maam,
     pdf.ln(120)  # Adjust the value (e.g., 100, 120) to match the gap you need
 
     # Adding the content
-    pdf.cell(200, 10, txt="Kindly Att.", ln=True, align='R')
+    pdf.cell(200, 10, txt="Kindly Att.", ln=True, align='L')
     pdf.cell(200, 10, txt=f"Date-{date}", ln=True, align='R')
     pdf.ln(10)
     
