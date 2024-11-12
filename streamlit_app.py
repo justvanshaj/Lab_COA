@@ -2,7 +2,7 @@ import streamlit as st
 from fpdf import FPDF
 from datetime import datetime
 
-# Function to create PDF with top gap
+# Function to create PDF with top gap and alignment for "Kindly Att." and Date
 def create_pdf(date, full_name, designation, company_name, city_state, sir_maam, guar_type_1, guar_weight_1, guar_type_2, guar_weight_2):
     pdf = FPDF()
     pdf.add_page()
@@ -11,12 +11,14 @@ def create_pdf(date, full_name, designation, company_name, city_state, sir_maam,
     pdf.set_font("Arial", size=12)
 
     # Adding top gap
-    pdf.ln(50)  # Adjust the value (e.g., 100, 120) to match the gap you need
+    pdf.ln(50)  # Adjust the value as needed to match your desired gap
 
-    # Adding the content
-    pdf.cell(200, 10, txt="Kindly Att.", ln=True, align='L')
-    pdf.cell(200, 10, txt=f"Date-{date}", ln=True, align='R')
-    pdf.ln(10)
+    # Adding "Kindly Att." on the left and Date on the right on the same line
+    pdf.cell(0, 10, txt="Kindly Att.", ln=False, align='L')
+    pdf.cell(0, 10, txt=f"Date-{date}", ln=True, align='R')
+    
+    # Adding the rest of the content
+    pdf.ln(10)  # Line break after the first line
     
     pdf.cell(200, 10, txt=f"{sir_maam} {full_name},", ln=True)
     pdf.cell(200, 10, txt=designation, ln=True)
