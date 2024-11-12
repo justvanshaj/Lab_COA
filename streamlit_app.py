@@ -63,4 +63,23 @@ with st.form("pdf_form"):
     full_name = st.text_input("Full Name")
     designation = st.text_input("Designation")
     company_name = st.text_input("Company Name")
- 
+    city_state = st.text_input("City, State")
+    salutation2 = st.selectbox("Salutation2", ["Sir", "Ma’am"])
+    guar_type_1 = st.selectbox("Guar Type A", ["Churi", "Korma"])
+    guar_weight_1 = st.number_input("Guar Weight A (KG)", min_value=0)
+    guar_type_2 = st.selectbox("Guar Type B", ["Churi", "Korma"])
+    guar_weight_2 = st.number_input("Guar Weight B (KG)", min_value=0)
+    
+    # Submit button
+    submitted = st.form_submit_button("Generate PDF")
+
+if submitted:
+    # Convert date to string format
+    date_str = date.strftime("%d/%m/%Y")
+    
+    # Create PDF
+    pdf_path = create_pdf(date_str, salutation1, full_name, designation, company_name, city_state, salutation2, guar_type_1, guar_weight_1, guar_type_2, guar_weight_2)
+    
+    # Display the link to download the PDF
+    with open(pdf_path, "rb") as f:
+        st.download_button("Download PDF", f, file_name="generated_letter.pdf")
