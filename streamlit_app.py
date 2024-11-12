@@ -28,14 +28,14 @@ def create_pdf(date, salutation1, full_name, designation, company_name, city_sta
     pdf.cell(200, 5, txt=city_state, ln=True)
     pdf.ln(10)
 
-    pdf.set_font("Arial", size=10)
+    pdf.set_font("Arial", size=0)
     pdf.cell(200, 10, txt=f"Dear {salutation2},", ln=True)
     pdf.ln(5)
     pdf.cell(200, 10, txt="As per your requirement we are sending you sample of -", ln=True)
     pdf.ln(5)
     
-    pdf.cell(200, 10, txt=f"A) Guar {guar_type_1} - {guar_weight_1}KG.", ln=True)
-    pdf.cell(200, 10, txt=f"B) Guar {guar_type_2} - {guar_weight_2}KG.", ln=True)
+    pdf.cell(200, 5, txt=f"A) Guar {guar_type_1} - {guar_weight_1}KG.", ln=True)
+    pdf.cell(200, 5, txt=f"B) Guar {guar_type_2} - {guar_weight_2}KG.", ln=True)
     pdf.ln(10)
     
     pdf.cell(200, 10, txt="Kindly acknowledge me receipt of the same.", ln=True)
