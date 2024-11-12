@@ -22,10 +22,10 @@ def create_pdf(date, salutation1, full_name, designation, company_name, city_sta
     
     # Bold Full Name and City State
     pdf.set_font("Arial", style='B', size=10)
-    pdf.cell(200, 10, txt=f"{salutation1} {full_name},", ln=True)
-    pdf.cell(200, 10, txt=designation, ln=True)
-    pdf.cell(200, 10, txt=company_name + ",", ln=True)
-    pdf.cell(200, 10, txt=city_state, ln=True)
+    pdf.cell(200, 5, txt=f"{salutation1} {full_name},", ln=True)
+    pdf.cell(200, 5, txt=designation, ln=True)
+    pdf.cell(200, 5, txt=company_name + ",", ln=True)
+    pdf.cell(200, 5, txt=city_state, ln=True)
     pdf.ln(10)
 
     pdf.set_font("Arial", size=10)
